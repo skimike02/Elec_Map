@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 2198px;
+            height: 1276px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/California_Electric_Transmission_Lines_1.js"></script>
+        <script src="data/Power_Plants_2.js"></script>
+        <script src="data/California_Electric_Substation_3.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[38.44569881036919,-121.67424348720172],[38.67765996075659,-121.16290702801676]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OpenStreetMap_0');
+        map.getPane('pane_OpenStreetMap_0').style.zIndex = 400;
+        var layer_OpenStreetMap_0 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OpenStreetMap_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.addLayer(layer_OpenStreetMap_0);
+        function pop_California_Electric_Transmission_Lines_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">kV</th>\
+                        <td>' + (feature.properties['kV'] !== null ? autolinker.link(feature.properties['kV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">kV_Sort</th>\
+                        <td>' + (feature.properties['kV_Sort'] !== null ? autolinker.link(feature.properties['kV_Sort'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Owner</th>\
+                        <td>' + (feature.properties['Owner'] !== null ? autolinker.link(feature.properties['Owner'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status</th>\
+                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Circuit</th>\
+                        <td>' + (feature.properties['Circuit'] !== null ? autolinker.link(feature.properties['Circuit'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Type</th>\
+                        <td>' + (feature.properties['Type'] !== null ? autolinker.link(feature.properties['Type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_California_Electric_Transmission_Lines_1_0(feature) {
+            if (feature.properties['kV_Sort'] >= 0.000000 && feature.properties['kV_Sort'] <= 60.000000 ) {
+                return {
+                pane: 'pane_California_Electric_Transmission_Lines_1',
+                opacity: 1,
+                color: 'rgba(255,127,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['kV_Sort'] >= 60.000000 && feature.properties['kV_Sort'] <= 66.000000 ) {
+                return {
+                pane: 'pane_California_Electric_Transmission_Lines_1',
+                opacity: 1,
+                color: 'rgba(255,127,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 5.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['kV_Sort'] >= 66.000000 && feature.properties['kV_Sort'] <= 69.000000 ) {
+                return {
+                pane: 'pane_California_Electric_Transmission_Lines_1',
+                opacity: 1,
+                color: 'rgba(255,127,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 7.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['kV_Sort'] >= 69.000000 && feature.properties['kV_Sort'] <= 115.000000 ) {
+                return {
+                pane: 'pane_California_Electric_Transmission_Lines_1',
+                opacity: 1,
+                color: 'rgba(255,127,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 10.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['kV_Sort'] >= 115.000000 && feature.properties['kV_Sort'] <= 230.000000 ) {
+                return {
+                pane: 'pane_California_Electric_Transmission_Lines_1',
+                opacity: 1,
+                color: 'rgba(255,127,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 13.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['kV_Sort'] >= 230.000000 && feature.properties['kV_Sort'] <= 500.000000 ) {
+                return {
+                pane: 'pane_California_Electric_Transmission_Lines_1',
+                opacity: 1,
+                color: 'rgba(255,127,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 15.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_California_Electric_Transmission_Lines_1');
+        map.getPane('pane_California_Electric_Transmission_Lines_1').style.zIndex = 401;
+        map.getPane('pane_California_Electric_Transmission_Lines_1').style['mix-blend-mode'] = 'normal';
+        var layer_California_Electric_Transmission_Lines_1 = new L.geoJson(json_California_Electric_Transmission_Lines_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_California_Electric_Transmission_Lines_1',
+            layerName: 'layer_California_Electric_Transmission_Lines_1',
+            pane: 'pane_California_Electric_Transmission_Lines_1',
+            onEachFeature: pop_California_Electric_Transmission_Lines_1,
+            style: style_California_Electric_Transmission_Lines_1_0,
+        });
+        bounds_group.addLayer(layer_California_Electric_Transmission_Lines_1);
+        map.addLayer(layer_California_Electric_Transmission_Lines_1);
+        function pop_Power_Plants_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Plant_ID</th>\
+                        <td>' + (feature.properties['Plant_ID'] !== null ? autolinker.link(feature.properties['Plant_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Plant_Alia</th>\
+                        <td>' + (feature.properties['Plant_Alia'] !== null ? autolinker.link(feature.properties['Plant_Alia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Plant_Labe</th>\
+                        <td>' + (feature.properties['Plant_Labe'] !== null ? autolinker.link(feature.properties['Plant_Labe'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MW</th>\
+                        <td>' + (feature.properties['MW'] !== null ? autolinker.link(feature.properties['MW'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Gross_MWh</th>\
+                        <td>' + (feature.properties['Gross_MWh'] !== null ? autolinker.link(feature.properties['Gross_MWh'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Net_MWh</th>\
+                        <td>' + (feature.properties['Net_MWh'] !== null ? autolinker.link(feature.properties['Net_MWh'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">General_Fu</th>\
+                        <td>' + (feature.properties['General_Fu'] !== null ? autolinker.link(feature.properties['General_Fu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status</th>\
+                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude</th>\
+                        <td>' + (feature.properties['Longitude'] !== null ? autolinker.link(feature.properties['Longitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude</th>\
+                        <td>' + (feature.properties['Latitude'] !== null ? autolinker.link(feature.properties['Latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Elevation</th>\
+                        <td>' + (feature.properties['Elevation'] !== null ? autolinker.link(feature.properties['Elevation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MW_Excl_Lg</th>\
+                        <td>' + (feature.properties['MW_Excl_Lg'] !== null ? autolinker.link(feature.properties['MW_Excl_Lg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Power_Plants_2_0(feature) {
+            if (feature.properties['MW_Excl_Lg'] >= 0.000000 && feature.properties['MW_Excl_Lg'] <= 100.000000 ) {
+                return {
+                pane: 'pane_Power_Plants_2',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(241,136,22,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(170,10,249,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['MW_Excl_Lg'] >= 100.000000 && feature.properties['MW_Excl_Lg'] <= 200.000000 ) {
+                return {
+                pane: 'pane_Power_Plants_2',
+                radius: 15.0,
+                opacity: 1,
+                color: 'rgba(241,136,22,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(170,10,249,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['MW_Excl_Lg'] >= 200.000000 && feature.properties['MW_Excl_Lg'] <= 300.000000 ) {
+                return {
+                pane: 'pane_Power_Plants_2',
+                radius: 20.0,
+                opacity: 1,
+                color: 'rgba(241,136,22,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(170,10,249,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['MW_Excl_Lg'] >= 300.000000 && feature.properties['MW_Excl_Lg'] <= 400.000000 ) {
+                return {
+                pane: 'pane_Power_Plants_2',
+                radius: 25.0,
+                opacity: 1,
+                color: 'rgba(241,136,22,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(170,10,249,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['MW_Excl_Lg'] >= 400.000000 && feature.properties['MW_Excl_Lg'] <= 500.000000 ) {
+                return {
+                pane: 'pane_Power_Plants_2',
+                radius: 30.0,
+                opacity: 1,
+                color: 'rgba(241,136,22,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(170,10,249,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Power_Plants_2');
+        map.getPane('pane_Power_Plants_2').style.zIndex = 402;
+        map.getPane('pane_Power_Plants_2').style['mix-blend-mode'] = 'normal';
+        var layer_Power_Plants_2 = new L.geoJson(json_Power_Plants_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Power_Plants_2',
+            layerName: 'layer_Power_Plants_2',
+            pane: 'pane_Power_Plants_2',
+            onEachFeature: pop_Power_Plants_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Power_Plants_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Power_Plants_2);
+        map.addLayer(layer_Power_Plants_2);
+        function pop_California_Electric_Substation_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Substation</th>\
+                        <td>' + (feature.properties['Substation'] !== null ? autolinker.link(feature.properties['Substation'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Substati_1</th>\
+                        <td>' + (feature.properties['Substati_1'] !== null ? autolinker.link(feature.properties['Substati_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status</th>\
+                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Owner</th>\
+                        <td>' + (feature.properties['Owner'] !== null ? autolinker.link(feature.properties['Owner'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Highest_kV</strong><br />' + (feature.properties['Highest_kV'] !== null ? autolinker.link(feature.properties['Highest_kV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitute</th>\
+                        <td>' + (feature.properties['Longitute'] !== null ? autolinker.link(feature.properties['Longitute'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude</th>\
+                        <td>' + (feature.properties['Latitude'] !== null ? autolinker.link(feature.properties['Latitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Max_kV</th>\
+                        <td>' + (feature.properties['Max_kV'] !== null ? autolinker.link(feature.properties['Max_kV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_California_Electric_Substation_3_0(feature) {
+            if (feature.properties['Max_kV'] >= 32.000000 && feature.properties['Max_kV'] <= 100.000000 ) {
+                return {
+                pane: 'pane_California_Electric_Substation_3',
+                shape: 'square',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Max_kV'] >= 100.000000 && feature.properties['Max_kV'] <= 200.000000 ) {
+                return {
+                pane: 'pane_California_Electric_Substation_3',
+                shape: 'square',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Max_kV'] >= 200.000000 && feature.properties['Max_kV'] <= 300.000000 ) {
+                return {
+                pane: 'pane_California_Electric_Substation_3',
+                shape: 'square',
+                radius: 12.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Max_kV'] >= 300.000000 && feature.properties['Max_kV'] <= 400.000000 ) {
+                return {
+                pane: 'pane_California_Electric_Substation_3',
+                shape: 'square',
+                radius: 16.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Max_kV'] >= 400.000000 && feature.properties['Max_kV'] <= 500.000000 ) {
+                return {
+                pane: 'pane_California_Electric_Substation_3',
+                shape: 'square',
+                radius: 20.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_California_Electric_Substation_3');
+        map.getPane('pane_California_Electric_Substation_3').style.zIndex = 403;
+        map.getPane('pane_California_Electric_Substation_3').style['mix-blend-mode'] = 'normal';
+        var layer_California_Electric_Substation_3 = new L.geoJson(json_California_Electric_Substation_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_California_Electric_Substation_3',
+            layerName: 'layer_California_Electric_Substation_3',
+            pane: 'pane_California_Electric_Substation_3',
+            onEachFeature: pop_California_Electric_Substation_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_California_Electric_Substation_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_California_Electric_Substation_3);
+        map.addLayer(layer_California_Electric_Substation_3);
+        setBounds();
+        resetLabels([layer_California_Electric_Transmission_Lines_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_California_Electric_Transmission_Lines_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_California_Electric_Transmission_Lines_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_California_Electric_Transmission_Lines_1]);
+        });
+        </script>
+    </body>
+</html>
